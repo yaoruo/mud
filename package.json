@@ -24,6 +24,7 @@
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
+    "html2canvas": "^1.4.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
