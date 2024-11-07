@@ -37,4 +37,10 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
+    "scripts": {
+    "dev": "next dev",
+    "build": "next build --no-lint",
+    "start": "next start",
+    "lint": "next lint"
+  }
 }
