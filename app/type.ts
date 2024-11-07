@@ -1,39 +1,39 @@
-export interface Position {
-  x: number;
-  y: number;
+export type Exit = {
+  direction: string
+  destination: string
 }
 
-export interface Exit {
-  direction: string;
-  destination: string;
+export type Room = {
+  id: string
+  name: string
+  title: string
+  description: string
+  exits: Exit[]
+  x: number
+  y: number
+  tags: string[]
+  [key: string]: boolean | string | Exit[] | number | string[]
 }
 
-export interface Room {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  exits: Exit[];
-  x: number;
-  y: number;
-  tags: string[];
-  [key: string]: any;
+export type Template = {
+  name: string
+  room: Omit<Room, 'id' | 'x' | 'y'>
 }
 
-export interface Template {
-  name: string;
-  room: Partial<Room>;
+export type Position = {
+  x: number
+  y: number
 }
 
-export interface AttributeTemplate {
-  id: string;
-  name: string;
+export type Direction = {
+  value: string
+  label: string
+  icon?: any
+  dx: number
+  dy: number
 }
 
-export interface Direction {
-  value: string;
-  label: string;
-  icon?: any;
-  dx: number;
-  dy: number;
+export type AttributeTemplate = {
+  id: string
+  name: string
 }
