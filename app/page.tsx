@@ -92,18 +92,18 @@ const directions = [
 ]
 
 export default function AdvancedMUDRoomCreator() {
-  // 已有的状态定义
+  const mapRef = useRef<HTMLDivElement>(null)
+  const undoTimeoutRef = useRef<NodeJS.Timeout>()
+  const lastSaveTimeRef = useRef<number>(Date.now())
+
+  // 状态定义
   const [rooms, setRooms] = useState<MudRoom[]>([])
   const [currentRoom, setCurrentRoom] = useState<MudRoom | null>(null)
   const [templates, setTemplates] = useState<RoomTemplate[]>([])
   const [offset, setOffset] = useState<MapPosition>({ x: 0, y: 0 })
   const [startDragPos, setStartDragPos] = useState<MapPosition>({ x: 0, y: 0 })
-  
-  // 添加 history 相关的状态
   const [history, setHistory] = useState<MudRoom[][]>([[]])
   const [historyIndex, setHistoryIndex] = useState<number>(0)
-
-  // 添加其他状态
   const [scale, setScale] = useState(1)
   const [isDragging, setIsDragging] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
