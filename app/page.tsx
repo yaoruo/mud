@@ -1,6 +1,6 @@
 'use client'
 
-import { Room, Template, Exit, Position, Direction, AttributeTemplate } from '@/types'
+import { Room, Template, Exit, Position, Direction, AttributeTemplate } from './types'
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
