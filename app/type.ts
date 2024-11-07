@@ -17,7 +17,7 @@ export interface Room {
   x: number;
   y: number;
   tags: string[];
-  [key: string]: any; // 用于自定义属性
+  [key: string]: any;
 }
 
 export interface Template {
