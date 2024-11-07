@@ -1,34 +1,34 @@
 'use client'
 
 // 类型定义
-export type Exit = {
+type RoomExit = {
   direction: string
   destination: string
 }
 
-export type Room = {
+type MudRoom = {
   id: string
   name: string
   title: string
   description: string
-  exits: Exit[]
+  exits: RoomExit[]
   x: number
   y: number
   tags: string[]
-  [key: string]: boolean | string | Exit[] | number | string[]
+  [key: string]: boolean | string | RoomExit[] | number | string[]
 }
 
-export type Template = {
+type RoomTemplate = {
   name: string
-  room: Omit<Room, 'id' | 'x' | 'y'>
+  room: Omit<MudRoom, 'id' | 'x' | 'y'>
 }
 
-export type Position = {
+type MapPosition = {
   x: number
   y: number
 }
 
-export type Direction = {
+type RoomDirection = {
   value: string
   label: string
   icon?: any
@@ -36,7 +36,7 @@ export type Direction = {
   dy: number
 }
 
-export type AttributeTemplate = {
+type RoomAttribute = {
   id: string
   name: string
 }
@@ -92,29 +92,18 @@ const directions = [
 ]
 
 export default function AdvancedMUDRoomCreator() {
-  const [rooms, setRooms] = useState<Room[]>([])
-  const [currentRoom, setCurrentRoom] = useState<Room | null>(null)
-  const [templates, setTemplates] = useState<Template[]>([])
-  const [scale, setScale] = useState(1)
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
-  const [isDragging, setIsDragging] = useState(false)
-  const [startDragPos, setStartDragPos] = useState({ x: 0, y: 0 })
-  const [history, setHistory] = useState<Room[][]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [newTag, setNewTag] = useState('')
-  const [searchResults, setSearchResults] = useState<Room[]>([]);
-  const [prefixes, setPrefixes] = useState<string[]>(['/d/city/', '/d/village/', '/d/forest/']);
-  const [selectedPrefix, setSelectedPrefix] = useState<string>('/d/city/');
-  const mapRef = useRef<HTMLDivElement>(null)
-  const [newAttributeId, setNewAttributeId] = useState('');
-  const [newAttributeName, setNewAttributeName] = useState('');
-  const [attributeTemplates, setAttributeTemplates] = useState<{ id: string; name: string }[]>([
+  // 更新所有使用这些类型的地方
+  const [rooms, setRooms] = useState<MudRoom[]>([])
+  const [currentRoom, setCurrentRoom] = useState<MudRoom | null>(null)
+  const [templates, setTemplates] = useState<RoomTemplate[]>([])
+  const [offset, setOffset] = useState<MapPosition>({ x: 0, y: 0 })
+  const [startDragPos, setStartDragPos] = useState<MapPosition>({ x: 0, y: 0 })
+  const [attributeTemplates, setAttributeTemplates] = useState<RoomAttribute[]>([
     { id: 'no_fight', name: '禁止战斗' },
     { id: 'fuben', name: '副本地图' },
     { id: 'no_showroom', name: '禁止传送' },
     { id: 'outdoors', name: '室外' },
-  ]);
+  ])
 
   useEffect(() => {
     const savedRooms = localStorage.getItem('mudRooms')
