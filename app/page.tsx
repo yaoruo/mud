@@ -92,18 +92,33 @@ const directions = [
 ]
 
 export default function AdvancedMUDRoomCreator() {
-  // 更新所有使用这些类型的地方
+  // 已有的状态定义
   const [rooms, setRooms] = useState<MudRoom[]>([])
   const [currentRoom, setCurrentRoom] = useState<MudRoom | null>(null)
   const [templates, setTemplates] = useState<RoomTemplate[]>([])
   const [offset, setOffset] = useState<MapPosition>({ x: 0, y: 0 })
   const [startDragPos, setStartDragPos] = useState<MapPosition>({ x: 0, y: 0 })
+  
+  // 添加 history 相关的状态
+  const [history, setHistory] = useState<MudRoom[][]>([[]])
+  const [historyIndex, setHistoryIndex] = useState<number>(0)
+
+  // 添加其他状态
+  const [scale, setScale] = useState(1)
+  const [isDragging, setIsDragging] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [newTag, setNewTag] = useState('')
+  const [searchResults, setSearchResults] = useState<MudRoom[]>([])
+  const [prefixes, setPrefixes] = useState<string[]>(['/d/city/', '/d/village/', '/d/forest/'])
+  const [selectedPrefix, setSelectedPrefix] = useState<string>('/d/city/')
   const [attributeTemplates, setAttributeTemplates] = useState<RoomAttribute[]>([
     { id: 'no_fight', name: '禁止战斗' },
     { id: 'fuben', name: '副本地图' },
     { id: 'no_showroom', name: '禁止传送' },
     { id: 'outdoors', name: '室外' },
   ])
+  const [newAttributeId, setNewAttributeId] = useState('')
+  const [newAttributeName, setNewAttributeName] = useState('')
 
   useEffect(() => {
     const savedRooms = localStorage.getItem('mudRooms')
