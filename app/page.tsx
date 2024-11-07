@@ -636,9 +636,11 @@ const gridContent = useMemo(() => {
             onChange={importMap}
             accept=".json"
           />
-          <Button as="span" onClick={() => document.getElementById('import-map')?.click()}>
-            <FileUp className="mr-2 h-4 w-4" />导入地图
-          </Button>
+<Button asChild onClick={() => document.getElementById('import-map')?.click()}>
+  <span>
+    <FileUp className="mr-2 h-4 w-4" />导入地图
+  </span>
+</Button>
         </label>
 <AlertDialog>
   <AlertDialogTrigger asChild>
